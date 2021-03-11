@@ -2,11 +2,7 @@ import { Schema, model } from 'mongoose';
 const { ObjectId } = Schema.Types;
 
 const taskSchema = new Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    description: {
+    task: {
         type: String,
         required: true
     },
@@ -23,10 +19,14 @@ const taskSchema = new Schema({
         type: Boolean,
         default: false
     },
-    author: {
+    userId: {
         type: ObjectId,
         ref: 'User'
-    }
+    },
+    projectId: {
+        type: String,
+        ref: 'Project'
+    },
 });
 
 export default model('Task', taskSchema);
