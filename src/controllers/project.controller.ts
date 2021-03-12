@@ -13,7 +13,7 @@ export const getProjectsByUser = async (req: any, res: Response) => {
     };
 };
 
-export const getProjectkById = async (req: any, res: Response) => {
+export const getProjectsById = async (req: any, res: Response) => {
     const { id } = req.params;
     try {
         const project = await Project.findById(id);
