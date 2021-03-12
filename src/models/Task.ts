@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 const { ObjectId } = Schema.Types;
 
 const taskSchema = new Schema({
-    task: {
+    taskname: {
         type: String,
         required: true
     },
