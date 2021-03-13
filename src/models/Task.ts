@@ -6,9 +6,6 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    priority: {
-        type: String
-    },
     date: {
         type: Date
     },
@@ -22,11 +19,7 @@ const taskSchema = new Schema({
     userId: {
         type: ObjectId,
         ref: 'User'
-    },
-    projectId: {
-        type: String,
-        ref: 'Project'
-    },
+    }
 });
 
 export default model('Task', taskSchema);

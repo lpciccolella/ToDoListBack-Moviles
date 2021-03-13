@@ -32,23 +32,25 @@ export const signUp = async (req: Request, res: Response): Promise<Response> => 
     };
 };
 
-export const signIn = async (req: Request, res: Response) => {
+export const signIn = async (req: Request, res: Response): Promise<Response> => {
     const { email, password } = req.body;
     try {
         if (!email || !password) return res.status(422).json({ status: 422, error: 'Please complete all fields' });
-        const savedUser: any = await User.findOne({ email });
-        if (!savedUser) return res.status(422).json({ status: 422, error: 'Invalid credentials' });
-        const correctCreds = await compare(password, savedUser.password);
+        const user: any = await User.findOne({ email });
+        if (!user){
+            return res.status(422).json({ status: 422, error: 'Invalid credentials' });
+        } 
+        const correctCreds = await compare(password, user.password);
         if (correctCreds) {
             return res.status(200).json({
                 status: 200,
                 message: 'User successfully signed in',
-                token: createToken(savedUser._id)
+                token: createToken(user._id)
             });
         }
         return res.status(422).json({ status: 422, error: 'Invalid credentials' });
     } catch (e) {
         console.error(e);
         return res.status(500).json({ status: 500, message: 'Internal server error', error: e });
-    };
+    }
 };

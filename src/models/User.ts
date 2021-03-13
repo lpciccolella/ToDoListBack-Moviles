@@ -20,5 +20,4 @@ const userSchema = new Schema({
         maxlength: 64
     }
 });
-
 export default model('User', userSchema);

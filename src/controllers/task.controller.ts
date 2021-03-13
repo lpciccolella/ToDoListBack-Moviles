@@ -25,18 +25,15 @@ export const getTaskById = async (req: any, res: Response) => {
 };
 
 export const createTask = async (req: any, res: Response) => {
-    const { taskname, priority, date, time, pinned, userId, projectId } = req.body;
+    const { taskname, date, time, pinned} = req.body;
     const { _id } = req.user;
     try {
         const newTask = new Task({
             taskname,
-            priority,
             date,
             time,
             pinned,
-            userId: _id,
-            projectId
-
+            userId: _id
         });
         await newTask.save();
         return res.status(200).json({ status: 200, message: 'Task successfully created', task: newTask });
@@ -47,18 +44,16 @@ export const createTask = async (req: any, res: Response) => {
 };
 
 export const updateTask = async (req: any, res: Response) => {
-    const { taskname, priority, date, time, pinned, userId, projectId} = req.body;
+    const { taskname, date, time, pinned} = req.body;
     const { _id } = req.user;
     const { id } = req.params;
     try {
         const task = await Task.findByIdAndUpdate(id, {
             taskname,
-            priority,
             date,
             time,
             pinned,
             userId: _id,
-            projectId
         }, { new: true });
         return res.status(200).json({ status: 200, message: 'Task successfully updated', task });
     } catch (e) {
