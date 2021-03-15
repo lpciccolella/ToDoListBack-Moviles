@@ -6,7 +6,6 @@ import passportMiddleware from './middlewares/passport';
 
 
 const app = express();
-const server = require('./controllers').Server(app);
 
 import authRoutes from './routes/auth';
 import taskRoutes from './routes/task';
@@ -34,7 +33,4 @@ app.use(authRoutes);
 app.use(taskRoutes);
 app.use(userRoutes);
 
-server.listen(process.env.PORT, function(){
-    console.log('listening on **:'+process.env.PORT);
-})
 export default app;
