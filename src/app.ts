@@ -25,7 +25,6 @@ passport.use(passportMiddleware);
 app.use(cors({
     origin: true
 }));
-app.use('/', require('./controllers'))
 
 //routes
 app.get('/', (req, res) => {
