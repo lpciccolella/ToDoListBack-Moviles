@@ -7,6 +7,6 @@ export default {
         URI: process.env.MONGODB_URI || 'mongodb+srv://lciccolella:lciccolella@twitterclonecluster.bsdlx.mongodb.net/dbname?retryWrites=true&w=majority',
         USER: process.env.MONGODB_USER|| 'lciccolella',
         PASSWORD: process.env.MONGODB_PASSWORD || 'lciccolella',
-        port: 3000
+       // port: 3000
     }
 }
