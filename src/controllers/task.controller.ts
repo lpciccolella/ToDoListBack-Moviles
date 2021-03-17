@@ -3,9 +3,9 @@ import { Request, Response } from 'express';
 import Task from '../models/Task';
 
 export const getTasksByUser = async (req: any, res: Response) => {
-    const { _id } = req.user;
+    const { _id } = req.users;
     try {
-        const tasks = await Task.find({ userId: _id });
+        const tasks = await Task.find({ author: _id });
         return res.status(200).json({ status: 200, tasks });
     } catch (e) {
         console.error(e);
@@ -26,14 +26,14 @@ export const getTaskById = async (req: any, res: Response) => {
 
 export const createTask = async (req: any, res: Response) => {
     const { taskname, date, time, pinned} = req.body;
-    const { _id } = req.user;
+    const { _id } = req.users;
     try {
         const newTask = new Task({
             taskname,
             date,
             time,
             pinned,
-            userId: _id
+            auhtor: _id
         });
         await newTask.save();
         return res.status(200).json({ status: 200, message: 'Task successfully created', task: newTask });
@@ -45,7 +45,7 @@ export const createTask = async (req: any, res: Response) => {
 
 export const updateTask = async (req: any, res: Response) => {
     const { taskname, date, time, pinned} = req.body;
-    const { _id } = req.user;
+    const { _id } = req.users;
     const { id } = req.params;
     try {
         const task = await Task.findByIdAndUpdate(id, {
@@ -53,7 +53,7 @@ export const updateTask = async (req: any, res: Response) => {
             date,
             time,
             pinned,
-            userId: _id,
+            author: _id,
         }, { new: true });
         return res.status(200).json({ status: 200, message: 'Task successfully updated', task });
     } catch (e) {

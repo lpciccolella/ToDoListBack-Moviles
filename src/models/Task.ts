@@ -16,7 +16,7 @@ const taskSchema = new Schema({
         type: Boolean,
         default: false
     },
-    users_id: {
+    author: {
         type: ObjectId,
         ref: 'users'
     }
