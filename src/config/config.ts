@@ -1,6 +1,6 @@
 export default {
     JWT_SECRET: process.env.JWT_SECRET,
-    jwtSecret: process.env.JWT_SECRET,
+    jwtSecret: process.env.JWT_SECRET , 
     secretOrKey: process.env.JWT_SECRET,
 
     DB: {
