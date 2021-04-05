@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 
 import Task from '../models/Task';
 
+// req se declara de tipo any debido a que al asignarle el tipo Request da error de tipado
+
 export const getTasksByUser = async (req: any, res: Response) => {
-    const { _id } = req.users;
+    const { _id } = req.user;
     try {
         const tasks = await Task.find({ author: _id });
         return res.status(200).json({ status: 200, tasks });
@@ -25,15 +27,17 @@ export const getTaskById = async (req: any, res: Response) => {
 };
 
 export const createTask = async (req: any, res: Response) => {
-    const { taskname, date, time, pinned} = req.body;
-    const { _id } = req.users;
+    const { title, description, priority, date, time, pinned } = req.body;
+    const { _id } = req.user;
     try {
         const newTask = new Task({
-            taskname,
+            title,
+            description,
+            priority,
             date,
             time,
             pinned,
-            auhtor: _id
+            author: _id
         });
         await newTask.save();
         return res.status(200).json({ status: 200, message: 'Task successfully created', task: newTask });
@@ -44,16 +48,18 @@ export const createTask = async (req: any, res: Response) => {
 };
 
 export const updateTask = async (req: any, res: Response) => {
-    const { taskname, date, time, pinned} = req.body;
-    const { _id } = req.users;
+    const { title, description, priority, date, time, pinned } = req.body;
+    const { _id } = req.user;
     const { id } = req.params;
     try {
         const task = await Task.findByIdAndUpdate(id, {
-            taskname,
+            title,
+            description,
+            priority,
             date,
             time,
             pinned,
-            author: _id,
+            author: _id
         }, { new: true });
         return res.status(200).json({ status: 200, message: 'Task successfully updated', task });
     } catch (e) {

@@ -2,9 +2,16 @@ import { Schema, model } from 'mongoose';
 const { ObjectId } = Schema.Types;
 
 const taskSchema = new Schema({
-    taskname: {
+    title: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    priority: {
+        type: String
     },
     date: {
         type: Date
@@ -18,7 +25,7 @@ const taskSchema = new Schema({
     },
     author: {
         type: ObjectId,
-        ref: 'users'
+        ref: 'User'
     }
 });
 

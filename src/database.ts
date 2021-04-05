@@ -1,5 +1,5 @@
 import mongoose, { ConnectOptions} from 'mongoose';
-import config from './config/config';
+import config from './config';
 
 
 const dbOptions: ConnectOptions = {

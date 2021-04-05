@@ -45,7 +45,7 @@ export const signIn = async (req: Request, res: Response): Promise<Response> => 
             return res.status(200).json({
                 status: 200,
                 message: 'User successfully signed in',
-                token: createToken(user._id)
+                token: createToken(user.id)
             });
         }
         return res.status(422).json({ status: 422, error: 'Invalid credentials' });
